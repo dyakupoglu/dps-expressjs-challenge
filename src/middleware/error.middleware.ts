@@ -1,4 +1,4 @@
-import { Request, Response } from 'express';
+import { Request, Response, NextFunction } from 'express';
 
 export interface ApiError extends Error {
 	statusCode: number;
@@ -36,6 +36,8 @@ export const errorHandler = (
 	err: ApiError,
 	req: Request,
 	res: Response,
+	// eslint-disable-next-line @typescript-eslint/no-unused-vars
+	_next: NextFunction,
 ): void => {
 	console.error(`Error: ${err.name} - ${err.message}`);
 	console.error(err.stack);
@@ -47,7 +49,6 @@ export const errorHandler = (
 		success: false,
 		error: {
 			message,
-			// ...(process.env.NODE_ENV === 'development' && { stack: err.stack }),
 		},
 	});
 };
