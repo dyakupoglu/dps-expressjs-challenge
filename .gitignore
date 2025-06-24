@@ -24,3 +24,8 @@ dist-ssr
 *.sw?
 
 .env
+
+# Build output
+dist/
+dist-ssr/
+coverage/

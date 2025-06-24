@@ -1,5 +1,6 @@
 import express, { Express, Request, Response } from 'express';
 import cors from 'cors';
+import morgan from 'morgan';
 import routes from './routes';
 import homeRoutes from './routes/home.routes';
 import { errorHandler } from './middleware/error.middleware';
@@ -8,8 +9,9 @@ import { config } from './config/env.config';
 const app: Express = express();
 const PORT = config.port;
 
-// Middleware
+// Middleware setup
 app.use(cors());
+app.use(morgan('combined'));
 app.use(express.json({ limit: '10mb' }));
 app.use(express.urlencoded({ extended: true }));
 
@@ -17,19 +19,26 @@ app.use(express.urlencoded({ extended: true }));
 app.use('/', homeRoutes);
 app.use('/api', routes);
 
-// 404 Error Handler
+// 404 handler for unmatched routes
 app.use('*', (req: Request, res: Response) => {
 	res.status(404).json({
 		success: false,
 		error: {
 			message: `Route ${req.originalUrl} not found`,
+			availableEndpoints: 'GET /',
 		},
 	});
 });
 
-// Error Handler
+// Global error handler
 app.use(errorHandler);
 
-app.listen(PORT, () => {
-	console.log(`[server]: 🚀 Server is running at http://localhost:${PORT}`);
-});
+export { app };
+
+if (process.env.NODE_ENV !== 'test') {
+	app.listen(PORT, () => {
+		console.log(
+			`[server]: 🚀 Server is running at http://localhost:${PORT}`,
+		);
+	});
+}
