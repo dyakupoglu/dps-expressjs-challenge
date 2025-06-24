@@ -1,42 +1,103 @@
 # DPS Backend Coding Challenge
 
-## Overview
+A RESTful API for managing projects and reports built with Node.js, Express.js, and TypeScript.
 
-This repository contains a very basic web application based on Typescript and Express.js. Main application file is `index.ts`. Node and npm are required.
+## 🚀 Features
 
-## Environment Setup
+- **REST API Development**: Full CRUD operations for projects and reports
+- **Special API Endpoint**: Special endpoint to find reports with repeated words (3+ occurrences)
+- **Authentication**: Bearer token security (`Password123`)
+- **Data Integrity**: Cascade delete for project-report relationships
+- **Type Safety**: Full TypeScript implementation
+- **Testing**: Comprehensive unit test suite
 
-Ensure you have Node.js (v14.x or later) and npm (v6.x or later) installed.  
-To set up and run the application, execute the following commands:
+## 🛠️ Tech Stack
 
+- **Runtime**: Node.js with TypeScript
+- **Framework**: Express.js
+- **Database**: SQLite3
+- **Testing**: Jest with ts-jest
+- **Code Quality**: ESLint + Prettier
+
+## 📋 API Endpoints
+
+### Public
+- `GET /` - API documentation
+- `GET /health` - Health check
+
+### Projects (Auth Required)
+- `GET /api/projects` - List all projects
+- `POST /api/projects` - Create project
+- `GET /api/projects/:id` - Get project by ID
+- `PUT /api/projects/:id` - Update project
+- `DELETE /api/projects/:id` - Delete project
+
+### Reports (Auth Required)
+- `GET /api/reports` - List all reports
+- `POST /api/reports` - Create report
+- `GET /api/reports/:id` - Get report by ID
+- `PUT /api/reports/:id` - Update report
+- `DELETE /api/reports/:id` - Delete report
+- `GET /api/reports/word-count` - Word analysis endpoint
+
+## 🚀 Quick Start
+
+1. **Clone & Install**
+   ```bash
+   git clone <repository-url>
+   cd dps-expressjs-challenge
+   npm install
+   ```
+
+2. **Environment Setup**
+   ```bash
+   cp .env.example .env
+   ```
+
+3. **Run Development Server**
+   ```bash
+   npm run dev
+   ```
+
+4. **Run Tests**
+   ```bash
+   npm test
+   ```
+
+## 🔑 Authentication
+
+All API endpoints require Bearer token authentication:
+
+```bash
+curl -H "Authorization: Bearer Password123" http://localhost:3000/api/projects
 ```
-npm install
-npm run dev
+
+## 📊 Testing
+
+- **Unit Tests**: Comprehensive service layer tests
+- **Coverage**: High coverage on business logic
+- **Framework**: Jest with TypeScript support
+
+```bash
+npm test              # Run all tests
+npm run test:coverage # Run with coverage report
+npm run test:watch    # Watch mode for development
 ```
 
-The application will then be accessible at http://localhost:3000.
-
-## Project Context
-
-You will develop a backend system for managing data about a company's projects and their associated reports. Each project may have multiple reports linked to it, though having reports is not mandatory. Start your implementation using the provided SQLite database([db/db.sqlite3](./db/db.sqlite3)).
-
-Refer to the database schema provided for understanding the data structure 👇
+## 🗄️ Database Schema
 
 ![Database schema](images/database_schema.png)
 
-NOTE: You can use ([db.service.ts](./src/services/db.service.ts)) to handle SQL queries to the database.
+## 📝 Scripts
 
-## Challenge Tasks
+```bash
+npm run dev       # Start development server
+npm run build     # Build for production
+npm start         # Start production server
+npm test          # Run unit tests
+npm run lint      # Check code quality
+npm run format    # Fix code formatting
+```
 
--   **Fork this project:** Start by forking this repository
--   **REST API Development:** Design and implement a RESTful API to create, read, update, and delete projects and their reports.
--   **Special API Endpoint:** Create an API endpoint that retrieves all reports where the same word appears at least three times.
--   **Optional:** Secure all API routes with a hardcoded authentication token ("Password123").
--   **Submission:** After completing the challenge, email us the URL of your GitHub repository.
--   **Further information:**
-    -   If there is anything unclear regarding requirements, contact us by replying to our email.
-    -   Use small commits, we want to see your progress towards the solution.
-    -   Code clean and follow the best practices.
-
-\
-Happy coding!
+---
+Built with ❤️ using Node.js, Express.js, and TypeScript

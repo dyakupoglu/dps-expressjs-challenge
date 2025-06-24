@@ -15,6 +15,12 @@ app.use(morgan('combined'));
 app.use(express.json({ limit: '10mb' }));
 app.use(express.urlencoded({ extended: true }));
 
+// API Version Header
+app.use((req: Request, res: Response, next) => {
+	res.setHeader('X-API-Version', 'v1');
+	next();
+});
+
 // Routes
 app.use('/', homeRoutes);
 app.use('/api', routes);

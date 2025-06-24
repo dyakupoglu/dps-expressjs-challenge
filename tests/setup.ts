@@ -6,7 +6,7 @@ dotenv.config({ path: '.env.test' });
 
 // Set test environment
 process.env.NODE_ENV = 'test';
-process.env.PORT = '3001'; // Use different port for tests
+process.env.PORT = '3001';
 
 // Global test configuration
 jest.setTimeout(10000);

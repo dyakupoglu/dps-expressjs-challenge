@@ -15,6 +15,7 @@ export const apiDocs = (req: Request, res: Response): void => {
 		title: 'DPS Express.js Challenge API',
 		baseUrl,
 		auth: 'Bearer Password123',
+		version: `1.0.0`,
 		endpoints: [
 			'GET /health - Health check',
 			'GET /api/projects - List projects',
